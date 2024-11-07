@@ -1,6 +1,6 @@
 package view;
 
-public interface EmployeeView {
+public interface ReferenceBookView {
     void start();
     void printAnswer(String answer);
 }

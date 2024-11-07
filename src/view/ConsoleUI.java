@@ -2,11 +2,9 @@ package view;
 
 import presenter.ReferenceBookPresenter;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class ConsoleUI implements EmployeeView{
+public class ConsoleUI implements ReferenceBookView {
     private final Scanner scanner;
     private final ReferenceBookPresenter presenter;
     private boolean work;
@@ -65,13 +63,20 @@ public class ConsoleUI implements EmployeeView{
     public void findEmployeesByExperience() {
         System.out.println("Введите стаж\n");
         String experience = scanner.nextLine();
-        printAnswer(presenter.findEmployeesByExperience(experience));
+        printAnswer("Сотрудники со стажем " + experience + " годов/лет:\n");
+        printAnswer(presenter.findEmployeesByExperience(Integer.parseInt(experience)));
     }
 
     public void findEmployeeByEmployeeId() {
+        System.out.println("Введите табельный номер\n");
+        String targetId = scanner.nextLine();
+        printAnswer(presenter.findEmployeeByEmployeeId(Integer.parseInt(targetId)));
     }
 
     public void findEmployeePhoneNumByEmployeeName() {
+        System.out.println("Введите имя сотрудника\n");
+        String name = scanner.nextLine();
+        printAnswer(presenter.findEmployeePhoneNumByEmployeeName(name));
     }
 
     public void endProgram() {

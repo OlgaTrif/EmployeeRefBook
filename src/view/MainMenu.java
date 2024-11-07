@@ -14,7 +14,7 @@ public class MainMenu {
         commands.add(new FindEmployeeByPerNum(consoleUI));
         commands.add(new FindPhoneNumByNameCommand(consoleUI));
         commands.add(new FindByExpCommand(consoleUI));
-
+        commands.add(new EndProgrammCommand(consoleUI));
     }
 
     public String menu(){

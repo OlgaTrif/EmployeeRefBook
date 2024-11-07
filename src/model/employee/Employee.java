@@ -10,7 +10,7 @@ public class Employee implements Serializable, ReferenseBookItem<Employee> {
     private String name;
     private Integer experience;
 
-    public Employee(int employeeId, String phoneNumber, String name, int experience) {
+    public Employee(Integer employeeId, String phoneNumber, String name, Integer experience) {
         this.employeelId = employeeId;
         this.phoneNumber = phoneNumber;
         this.name = name;
@@ -42,5 +42,18 @@ public class Employee implements Serializable, ReferenseBookItem<Employee> {
     @Override
     public int compareTo(Employee o) {
         return 0;
+    }
+
+    public String getMemberInfo() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("табельный номер: ");
+        sb.append(getEmployeeId());
+        sb.append("; имя: ");
+        sb.append(getName());
+        sb.append("; номер телефона: ");
+        sb.append(getPhoneNumber());
+        sb.append("; стаж: ");
+        sb.append(getExperience());
+        return sb.toString();
     }
 }

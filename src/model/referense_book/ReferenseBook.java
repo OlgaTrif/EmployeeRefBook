@@ -1,12 +1,11 @@
 package model.referense_book;
 
+import model.employee.Employee;
 import model.employee.iterator.EmployeeIterator;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ReferenseBook<E extends ReferenseBookItem<E>> implements Serializable, Iterable<E>{
     private int employeeId;
@@ -48,15 +47,26 @@ public class ReferenseBook<E extends ReferenseBookItem<E>> implements Serializab
         employeeId = i;
     }
 
-    private List<E> findEmployeesByExperience(Integer targetExperience) {
+    public List<E> findEmployeesByExperience(Integer targetExperience) {
         return emploeesList.stream().filter(emp -> Objects.equals(emp.getExperience(), targetExperience)).toList();
     }
 
-    private String findPhoneNumberByName(String targetName) {
-        return emploeesList.stream().filter(emp -> emp.getName().equals(targetName)).toList().getFirst().getPhoneNumber();
+    public String findPhoneNumberByName(String targetName) {
+        List<String> numbers = new ArrayList<>();
+        List<Employee> employees = (List<Employee>) emploeesList.stream().filter(emp -> emp.getName().equals(targetName)).toList();
+        for (Employee emp : employees) {
+            numbers.add(emp.getPhoneNumber());
+        }
+        if (numbers.size() > 1) {
+            return "Найдено несколько номеров для имени " + targetName + ": " + numbers;
+        } else if (numbers.isEmpty()){
+            return "Не найдено номеров. Проверьте правильность имени";
+        } else {
+            return numbers.getFirst();
+        }
     }
 
-    private E findEmployeeByEmployeeId(Integer targetId) {
+    public E findEmployeeByEmployeeId(Integer targetId) {
         return emploeesList.stream().filter(emp -> Objects.equals(emp.getEmployeeId(), targetId)).toList().getFirst();
     }
 

@@ -39,18 +39,36 @@ public class Service {
         save(employeesList);
     }
 
-    public String addEmployee(Integer id, String phoneNumber, String name, Integer exp) {
-        Employee employee = new Employee(id, phoneNumber, name, exp);
-        try{
-            employeesList.addEmployee(employee);
-            save(employeesList);
-            return "Сотрудник успешно добавлен";
-        } catch(Exception e) {
-            return "Ошибка добавления: " + e.getMessage();
+    public String getEmployeesListInfo() {
+        StringBuilder members = new StringBuilder();
+        for (Employee e : employeesList) {
+            members.append(e.getMemberInfo());
+            members.append("\n");
         }
+        return members.toString();
+    }
+
+    public void addEmployee(Integer id, String phoneNumber, String name, Integer exp) {
+        Employee employee = new Employee(id, phoneNumber, name, exp);
+        employeesList.addEmployee(employee);
+        save(employeesList);
     }
 
     public String findEmployeesByExperience(Integer experiece) {
+        return employeesList.findEmployeesByExperience(experiece).toString();
+    }
 
+    public String findEmployeeByEmployeeId(Integer targetId) {
+        String result = "";
+        try {
+            result = employeesList.findEmployeeByEmployeeId(targetId).getMemberInfo();
+        } catch (Exception E) {
+            result = "Сотрудник не найден";
+        }
+        return result;
+    }
+
+    public String findEmployeePhoneNumByEmployeeName(String name) {
+        return employeesList.findPhoneNumberByName(name);
     }
 }
