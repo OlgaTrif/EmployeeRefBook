@@ -5,16 +5,26 @@ import model.referense_book.ReferenseBookItem;
 import java.io.Serializable;
 
 public class Employee implements Serializable, ReferenseBookItem<Employee> {
+    private Integer id;
     private Integer employeelId;
     private String phoneNumber;
     private String name;
     private Integer experience;
 
     public Employee(Integer employeeId, String phoneNumber, String name, Integer experience) {
+        id = -1;
         this.employeelId = employeeId;
         this.phoneNumber = phoneNumber;
         this.name = name;
         this.experience = experience;
+    }
+
+    public void setId(Integer id){
+        this.id = id;
+    }
+
+    public Integer getId(){
+        return id;
     }
 
     public String getPhoneNumber() {
@@ -35,18 +45,15 @@ public class Employee implements Serializable, ReferenseBookItem<Employee> {
     }
 
     @Override
-    public void setId(Integer employeeId) {
-        this.employeelId = employeeId;
-    }
-
-    @Override
     public int compareTo(Employee o) {
         return 0;
     }
 
     public String getMemberInfo() {
         StringBuilder sb = new StringBuilder();
-        sb.append("табельный номер: ");
+        sb.append("id: ");
+        sb.append(getId());
+        sb.append("; табельный номер: ");
         sb.append(getEmployeeId());
         sb.append("; имя: ");
         sb.append(getName());

@@ -7,6 +7,9 @@ import model.referense_book.ReferenseBook;
 import model.writer.ReferenceBookWriteable;
 import model.writer.ReferenceBookWriter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Service {
     ReferenseBook<Employee> employeesList;
     private static final String filePath = "src/employees.txt";
@@ -55,7 +58,17 @@ public class Service {
     }
 
     public String findEmployeesByExperience(Integer experiece) {
-        return employeesList.findEmployeesByExperience(experiece).toString();
+        List<Employee> found = new ArrayList<>();
+        found.addAll(employeesList.findEmployeesByExperience(experiece));
+        if (found.isEmpty()) {
+            return "Нет сотрудников с подходящим стажем";
+        }
+        StringBuilder sb = new StringBuilder();
+        for(Employee e : found){
+            sb.append(e.getName());
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 
     public String findEmployeeByEmployeeId(Integer targetId) {

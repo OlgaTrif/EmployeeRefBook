@@ -5,14 +5,13 @@ import model.employee.iterator.EmployeeIterator;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ReferenseBook<E extends ReferenseBookItem<E>> implements Serializable, Iterable<E>{
-    private int employeeId;
+    private Integer employeeId;
     private List<E> emploeesList;
 
     public ReferenseBook(){
-        this.employeeId = -1;
+        this.employeeId = 0;
         this.setEmploeesList(new ArrayList<>());
     }
 
